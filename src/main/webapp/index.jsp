@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>拾光机</title>
+    <title>动漫</title>
 </head>
 <style>
     body {
@@ -80,11 +80,9 @@
 <body>
 <header>
     <div class="nav_group">
-        <nav class="nav"><a href="#">博客</a></nav>
-        <nav class="nav"><a href="#">动漫</a></nav>
-        <nav class="nav"><a href="#">仓库</a></nav>
+        <nav class="nav"><a href="http://www.unual.com">主页</a></nav>
     </div>
-    <div id="web_title">拾光机</div>
+    <div id="web_title">动漫</div>
     <br/>
     <div class="web_subtitle">Don't aim for success if you really want it.
         <br/> Just stick to what you love and believe in，and it will come naturally.
