@@ -1,6 +1,7 @@
 package com.unual.anime.service;
 
 import com.unual.anime.entity.Anime;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,5 +10,5 @@ import java.util.List;
 public interface AnimeService {
     Anime getAnimeById(int id);
 
-    List<Anime> getAnimeList(int page, int limit);
+    List<Anime> getAnimeList(String filter, int page, int limit);
 }

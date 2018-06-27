@@ -25,6 +25,9 @@
             anime_img
         FROM
             anime_list
+        WHERE
+            anime_name
+            LIKE ${filter}
         ORDER BY
             anime_id
         LIMIT ${page*limit}, ${(page+1)*limit}

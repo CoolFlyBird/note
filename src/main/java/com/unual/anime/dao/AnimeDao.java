@@ -9,5 +9,5 @@ public interface AnimeDao {
 
     Anime queryById(int id);
 
-    List<Anime> queryAll(@Param("page") int page, @Param("limit") int limit);
+    List<Anime> queryAll(@Param("filter") String filter, @Param("page") int page, @Param("limit") int limit);
 }

@@ -14,4 +14,12 @@ public class ConvertUtils {
         if (page < 0) page = 0;
         return page;
     }
+
+    public static String toQueryString(String string) {
+        if (string == null || string.length() == 0) {
+            return "\"%\"";
+        } else {
+            return "\"%" + string + "%\"";
+        }
+    }
 }

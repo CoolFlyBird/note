@@ -35,9 +35,13 @@ public class AnimeController {
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private List<Anime> getAnimeList(@RequestParam Map<String, String> params) {
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            System.out.println("entry:" + entry.getKey() + "-" + entry.getValue());
+        }
         int page = toIntUnsigned(PAGE, params.get("page"));
         int limit = toIntUnsigned(LIMIT, params.get("limit"));
-        List<Anime> animeList = animeService.getAnimeList(page, limit);
+        String filter = toQueryString(params.get("filter"));
+        List<Anime> animeList = animeService.getAnimeList(filter, page, limit);
         return new ArrayList(animeList);
     }
 
