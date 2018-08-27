@@ -10,5 +10,10 @@ import java.util.List;
 public interface AnimeService {
     Anime getAnimeById(int id);
 
+    Anime getTVById(int id);
+
     List<Anime> getAnimeList(String filter, int page, int limit);
+
+    List<Anime> getTVList(String filter, int page, int limit);
+
 }

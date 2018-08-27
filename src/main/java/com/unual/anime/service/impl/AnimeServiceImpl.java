@@ -18,7 +18,17 @@ public class AnimeServiceImpl implements AnimeService {
         return animeDao.queryById(id);
     }
 
+    @Override
+    public Anime getTVById(int id) {
+        return animeDao.queryTVById(id);
+    }
+
     public List<Anime> getAnimeList(@Param("filter") String filter, int page, int limit) {
         return animeDao.queryAll(filter, page, limit);
+    }
+
+    @Override
+    public List<Anime> getTVList(String filter, int page, int limit) {
+        return animeDao.queryTVAll(filter, page, limit);
     }
 }

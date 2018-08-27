@@ -1,6 +1,5 @@
 package com.unual.anime.web;
 
-import com.unual.anime.dto.Result;
 import com.unual.anime.entity.Anime;
 import com.unual.anime.entity.AnimeVideo;
 import com.unual.anime.service.AnimeService;
@@ -33,6 +32,13 @@ public class AnimeController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "tv/{id}", method = RequestMethod.GET)
+    private Anime getAnimeTVById(@PathVariable("id") int id) {
+        Anime anime = animeService.getTVById(id);
+        return anime;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private List<Anime> getAnimeList(@RequestParam Map<String, String> params) {
         for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -42,6 +48,19 @@ public class AnimeController {
         int limit = toIntUnsigned(LIMIT, params.get("limit"));
         String filter = toQueryString(params.get("filter"));
         List<Anime> animeList = animeService.getAnimeList(filter, page, limit);
+        return new ArrayList(animeList);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "tv/list", method = RequestMethod.GET)
+    private List<Anime> getTVList(@RequestParam Map<String, String> params) {
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            System.out.println("entry:" + entry.getKey() + "-" + entry.getValue());
+        }
+        int page = toIntUnsigned(PAGE, params.get("page"));
+        int limit = toIntUnsigned(LIMIT, params.get("limit"));
+        String filter = toQueryString(params.get("filter"));
+        List<Anime> animeList = animeService.getTVList(filter, page, limit);
         return new ArrayList(animeList);
     }
 

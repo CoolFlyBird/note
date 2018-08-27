@@ -32,4 +32,20 @@
             anime_id
         LIMIT ${page*limit}, ${(page+1)*limit}
     </select>
+
+    <select id="queryTVAll" resultType="Anime">
+        SELECT
+            anime_id,
+            anime_name,
+            anime_url,
+            anime_img
+        FROM
+            tv_list
+        WHERE
+            anime_name
+            LIKE ${filter}
+        ORDER BY
+            anime_id
+        LIMIT ${page*limit}, ${(page+1)*limit}
+    </select>
 </mapper>
