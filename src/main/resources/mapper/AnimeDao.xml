@@ -22,7 +22,7 @@
             anime_id,
             anime_name,
             anime_url,
-            anime_img
+            anime_img1
         FROM
             anime_list
         WHERE
