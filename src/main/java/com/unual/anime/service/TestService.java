@@ -1,12 +1,13 @@
 package com.unual.anime.service;
 
+import com.unual.anime.entity.Money;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface TestService {
-    int getMoneyById(int id);
+    Money getMoneyById(int id);
 
-    void updateMoneyById(int id, int money);
+    int updateMoneyById(int id, int money, int version);
 
     void insertMoneyRecordById(int id, String money);
 }

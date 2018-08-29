@@ -1,9 +1,9 @@
 package com.unual.anime.web;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.unual.anime.dto.Result;
 import com.unual.anime.entity.Anime;
 import com.unual.anime.entity.AnimeVideo;
+import com.unual.anime.entity.Money;
 import com.unual.anime.service.AnimeService;
 import com.unual.anime.service.AnimeVideoService;
 import com.unual.anime.service.TestService;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -86,8 +87,8 @@ public class AnimeController {
     @ResponseBody
     @RequestMapping(value = "test/money/{id}", method = RequestMethod.GET)
     private Result<Integer> getMoneyById(@PathVariable("id") int id) {
-        int money = testService.getMoneyById(id);
-        Result<Integer> result = new Result<>(money);
+        Money money = testService.getMoneyById(id);
+        Result<Integer> result = new Result<>(money.getMoney());
         return result;
     }
 
@@ -95,27 +96,32 @@ public class AnimeController {
 
 
     @ResponseBody
-//    @Options(timeout = 10000, flushCache = true)
+    @Options(timeout = 10000, flushCache = true)
     @RequestMapping(value = "test/money/{id}/subtract", method = RequestMethod.GET)
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED, rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public Result<Boolean> updateMoneyById(@PathVariable("id") int id, @RequestParam("money") int money) throws Exception {
-        int origin = testService.getMoneyById(id);
+        Money origin = testService.getMoneyById(id);
         Result<Boolean> result = null;
-        if (origin - money > 0) {
+        if (origin.getMoney() - money > 0) {
+            System.err.println("" + origin.getMoney() + " - " + money);
             Thread.sleep(1000);
-            System.err.println("" + origin + " - " + money);
-            testService.updateMoneyById(id, origin - money);
             testService.insertMoneyRecordById(id, "-" + money);
-            int current = testService.getMoneyById(id);
-            System.err.println("" + origin + " - " + current);
-            if (origin != current) {
-                throw new Exception("操作有误!");
+            int a = testService.updateMoneyById(id, origin.getMoney() - money, origin.getVersion());
+            System.err.println("" + origin.getMoney() + " - " + money + " - " + a);
+            if (a <= 0) {
+                throw new Exception("请勿频繁操作!");
             }
             result = new Result<Boolean>(true);
         } else {
             result = new Result<Boolean>("金额不够！");
         }
         return result;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
+    public boolean checkMoney(int origin, int id) {
+
+        return true;
     }
 
 }

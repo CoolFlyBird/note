@@ -4,28 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.unual.anime.dao.TestDao">
     <!-- 目的：为dao接口方法提供sql语句配置 -->
-    <select id="getMoneyById" resultType="int">
-        <!-- 具体的sql -->
+    <select id="getMoneyById" resultType="Money">
         SELECT
-        money
+        money,version
         FROM
         money_table
         WHERE
         id = #{0}
+        FOR UPDATE
     </select>
 
-    <select id="updateMoneyById" resultType="int">
-        <!-- 具体的sql -->
+    <update id="updateMoneyById">
         UPDATE
         money_table
         SET
         money = #{1}
+--         ,version = version + 1
         WHERE
         id = #{0}
-    </select>
+--         AND version = #{2}
+    </update>
 
     <select id="insertMoneyRecordById" resultType="int">
-        <!-- 具体的sql -->
         INSERT INTO
         record_table(id,record_time)
         VALUES

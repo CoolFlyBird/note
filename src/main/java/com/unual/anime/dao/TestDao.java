@@ -1,10 +1,12 @@
 package com.unual.anime.dao;
 
+import com.unual.anime.entity.Money;
+
 public interface TestDao {
 
-    int getMoneyById(int id);
+    Money getMoneyById(int id);
 
-    void updateMoneyById(int id, int money);
+    int updateMoneyById(int id, int money, int version);
 
     void insertMoneyRecordById(int id, String money);
 }
