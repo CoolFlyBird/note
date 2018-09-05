@@ -22,7 +22,7 @@
             anime_id,
             anime_name,
             anime_url,
-            anime_img1
+            anime_img
         FROM
             anime_list
         WHERE
@@ -30,7 +30,7 @@
             LIKE ${filter}
         ORDER BY
             anime_id
-        LIMIT ${page*limit}, ${(page+1)*limit}
+        LIMIT ${page*limit}, ${limit}
     </select>
 
     <select id="queryTVAll" resultType="Anime">
@@ -46,6 +46,6 @@
             LIKE ${filter}
         ORDER BY
             anime_id
-        LIMIT ${page*limit}, ${(page+1)*limit}
+        LIMIT ${page*limit}, ${limit}
     </select>
 </mapper>
