@@ -1,4 +1,4 @@
-package com.unual.anime.utils;
+package com.unual.note.utils;
 
 public class ConvertUtils {
     public static final int PAGE = 0;

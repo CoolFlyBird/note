@@ -1,4 +1,4 @@
-package com.unual.anime.dto;
+package com.unual.note.dto;
 
 
 public class Result<T> {

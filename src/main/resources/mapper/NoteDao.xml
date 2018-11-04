@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unual.note.dao.NoteDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <select id="queryTasksByDate" resultType="Task" parameterType="String">
+        <!-- 具体的sql -->
+        SELECT
+        taskId,
+        `name`,
+        `describe`,
+        total,
+        `current`,
+        `unit`,
+        status
+        FROM
+        task
+        WHERE
+        taskId in (
+        SELECT
+        taskId
+        FROM
+        dailyTask
+        WHERE
+        noteId in (
+        SELECT
+        noteId
+        FROM
+        daily
+        WHERE
+        date = #{0})
+        )
+    </select>
+</mapper>
